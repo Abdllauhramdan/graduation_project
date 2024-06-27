@@ -11,13 +11,18 @@ class EmployeeRequest extends FormRequest
         return true; // Add proper authorization logic
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
     public function rules()
     {
-        $employeeId = $this->employee ? $this->employee->id : null;
+        // $employeeId = $this->employee ? $this->employee->id : null;
         return [
             'emp_first_name' => 'required|string|max:255',
             'emp_last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:employees,email,' . $employeeId,
+            'email' => 'required|email|unique:employees,email,' , //$employeeId,
             'password' => 'required|string|min:6',
             'birth_date' => 'required|date|before_or_equal:today',
             'phone' => 'required|string',

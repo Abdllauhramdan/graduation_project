@@ -8,9 +8,14 @@ class UpdateMedicineRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // تحقق من صلاحيات المستخدم إذا لزم الأمر
+        return true;
     }
 
+    /**
+     * Get the validation rules that apply to the update medicine request.
+     *
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [

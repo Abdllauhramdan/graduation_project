@@ -17,26 +17,26 @@ class EmployeeControllerTest extends TestCase
         $response = $this->getJson('/api/employees');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'data' => [
-                         '*' => [
-                             'id',
-                             'emp_first_name',
-                             'emp_last_name',
-                             'email',
-                             'birth_date',
-                             'phone',
-                             'address',
-                             'employee_gender',
-                             'is_employee',
-                             'job_title',
-                             'salary',
-                             'created_at',
-                             'updated_at',
-                         ]
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'emp_first_name',
+                        'emp_last_name',
+                        'email',
+                        'birth_date',
+                        'phone',
+                        'address',
+                        'employee_gender',
+                        'is_employee',
+                        'job_title',
+                        'salary',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ]
+            ]);
     }
 
     public function testStore()
@@ -58,24 +58,24 @@ class EmployeeControllerTest extends TestCase
         $response = $this->postJson('/api/employees', $employeeData);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'data' => [
-                         'id',
-                         'emp_first_name',
-                         'emp_last_name',
-                         'email',
-                         'birth_date',
-                         'phone',
-                         'address',
-                         'employee_gender',
-                         'is_employee',
-                         'job_title',
-                         'salary',
-                         'created_at',
-                         'updated_at',
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    'id',
+                    'emp_first_name',
+                    'emp_last_name',
+                    'email',
+                    'birth_date',
+                    'phone',
+                    'address',
+                    'employee_gender',
+                    'is_employee',
+                    'job_title',
+                    'salary',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]);
     }
 
     public function testShow()
@@ -85,24 +85,24 @@ class EmployeeControllerTest extends TestCase
         $response = $this->getJson('/api/employees/' . $employee->id);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'data' => [
-                         'id',
-                         'emp_first_name',
-                         'emp_last_name',
-                         'email',
-                         'birth_date',
-                         'phone',
-                         'address',
-                         'employee_gender',
-                         'is_employee',
-                         'job_title',
-                         'salary',
-                         'created_at',
-                         'updated_at',
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    'id',
+                    'emp_first_name',
+                    'emp_last_name',
+                    'email',
+                    'birth_date',
+                    'phone',
+                    'address',
+                    'employee_gender',
+                    'is_employee',
+                    'job_title',
+                    'salary',
+                    'created_at',
+                    'updated_at',
+                ]
+            ]);
     }
 
     public function testUpdate()
@@ -118,14 +118,14 @@ class EmployeeControllerTest extends TestCase
         $response = $this->putJson('/api/employees/' . $employee->id, $updateData);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'data' => [
-                         'emp_first_name' => 'Jane',
-                         'emp_last_name' => 'Smith',
-                         'email' => 'jane.smith@example.com',
-                     ]
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'data' => [
+                    'emp_first_name' => 'Jane',
+                    'emp_last_name' => 'Smith',
+                    'email' => 'jane.smith@example.com',
+                ]
+            ]);
     }
 
     public function testDestroy()
@@ -135,10 +135,10 @@ class EmployeeControllerTest extends TestCase
         $response = $this->deleteJson('/api/employees/' . $employee->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Employee deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Employee deleted successfully',
+            ]);
     }
 
     public function testRestore()
@@ -149,10 +149,10 @@ class EmployeeControllerTest extends TestCase
         $response = $this->postJson('/api/employees/restore/' . $employee->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Employee restored successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Employee restored successfully',
+            ]);
     }
 
     public function testForceDelete()
@@ -163,9 +163,9 @@ class EmployeeControllerTest extends TestCase
         $response = $this->deleteJson('/api/employees/force-delete/' . $employee->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Employee force deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Employee force deleted successfully',
+            ]);
     }
 }

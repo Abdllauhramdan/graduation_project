@@ -22,6 +22,70 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/shop', function () {
+    return view('shop');
+});
+Route::get('/cart', function () {
+    return view('cart');
+});
+
+Route::get('/shop-single', function () {
+    return view('shop-single');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/thankyou', function () {
+    return view('thankyou');
+});
+Route::get('/admin/add_category', function () {
+    return view('admin/add_category');
+});
+Route::get('/admin/add_med', function () {
+    return view('admin/add_med');
+});
+Route::get('/admin/add_user', function () {
+    return view('admin/add_user');
+});
+
+Route::get('/admin/cart', function () {
+    return view('admin/cart');
+});
+Route::get('/admin/delete_customer', function () {
+    return view('admin/delete_customer');
+});
+Route::get('/admin/delete_category', function () {
+    return view('admin/delete_category');
+});
+Route::get('/admin/delete_med', function () {
+    return view('admin/delete_med');
+});
+Route::get('/admin/show_emp', function () {
+    return view('admin/show_emp');
+});
+Route::get('/admin/show_med', function () {
+    return view('admin/show_med');
+});
+
+Route::get('/admin/update_category', function () {
+    return view('admin/update_category');
+});
+Route::get('/admin/update_customer', function () {
+    return view('admin/update_customer');
+});
+Route::get('/admin/update_med', function () {
+    return view('admin/update_med');
+});
+
+
+
 // عرض جميع الفئات
 Route::get('categories', [CategoryController::class, 'index']);
 // إنشاء فئة جديدة
@@ -87,7 +151,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
-
 });
 
 
@@ -96,16 +159,16 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['middleware' => ['auth:api']], function () {
     // عرض بيانات المستخدم
     Route::get('/user/{user}', [AuthController::class, 'show']);
-    
+
     // تحديث بيانات المستخدم
     Route::put('/user/{user}', [AuthController::class, 'update']);
-    
+
     // حذف المستخدم
     Route::delete('/user/{user}', [AuthController::class, 'destroy']);
-    
+
     // استعادة المستخدم المحذوف
     Route::post('/user/restore/{id}', [AuthController::class, 'restoreUser']);
-    
+
     // الحذف النهائي للمستخدم
     Route::delete('/user/force-delete/{user}', [AuthController::class, 'forceDeleteUser']);
 });

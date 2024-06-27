@@ -11,6 +11,11 @@ class UserRequest extends FormRequest
         return true; // Ensure proper authorization logic
     }
 
+    /**
+     * Returns an array of validation rules for the request.
+     *
+     * @return array An array of validation rules.
+     */
     public function rules(): array
     {
         return [

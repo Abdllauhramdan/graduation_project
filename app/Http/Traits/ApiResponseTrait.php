@@ -2,22 +2,25 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Pagination\LengthAwarePaginator; // استيراد LengthAwarePaginator بشكل صحيح
+
 trait ApiResponseTrait
 {
     // response with token (for login - register in auth)
-    public function apiResponse($data,$token,$message,$status){
+    public function apiResponse($data, $token, $message, $status)
+    {
 
         $array = [
-            'data' =>$data,
-            'message' =>trans($message),
+            'data' => $data,
+            'message' => trans($message),
             'access_token' => $token,
             'token_type' => 'Bearer',
         ];
 
-        return response()->json($array,$status);
+        return response()->json($array, $status);
     }
 
-    
+
     /**
      * Return a succeful JSON Response
      *
@@ -29,10 +32,11 @@ trait ApiResponseTrait
      *
      */
     // custome response for all request
-    public function customeResponse($data, $message, $status) {
+    public function customeResponse($data, $message, $status)
+    {
         $array = [
-            'data'=>$data,
-            'message'=>trans($message)
+            'data' => $data,
+            'message' => trans($message)
         ];
 
         return response()->json($array, $status);

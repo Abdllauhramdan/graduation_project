@@ -4,6 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class ClientSeeder extends Seeder
 {
@@ -21,11 +26,19 @@ class ClientSeeder extends Seeder
         // $role->syncPermissions($permissions);
         $clientPermissions = [
             'view-medicines',
-            'view-users',
-            'view-roles',
-            'view-sales-operations',
+            // 'view-roles',
+            // 'create-role',
+            // 'view-role',
+            // 'update-role',
+            // 'delete-role',
+            'view-sales-operation',
+            'update-sales-operation',
+            'delete-sales-operation',
+            'restore-sales-operation',
+            'remove-medicine-from-sales-operation',
             'view-categories',
-            'view-employees',
+            'view-category',
+            
         ];
 
         foreach ($clientPermissions as $permissionName) {
@@ -39,7 +52,7 @@ class ClientSeeder extends Seeder
             'pharma_name' => 'pharmacy',
             'pharmacist_name' => 'sammer',
             'password' =>Hash::make('Password@12'), // تشفير كلمة المرور
-            'email' => 'Admin2000@gmail.com',
+            'email' => 'Abdram2000@gmail.com',
             'license_date' => now()->format('Y-m-d'),
             'license_number' => 'LICENSE46',
             'phone' => '9876543210',

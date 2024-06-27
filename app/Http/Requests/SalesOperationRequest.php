@@ -11,6 +11,11 @@ class SalesOperationRequest extends FormRequest
         return true; // Implement authorization logic
     }
 
+    /**
+     * Returns an array of validation rules for the SalesOperationRequest.
+     *
+     * @return array An array of validation rules.
+     */
     public function rules(): array
     {
         return [

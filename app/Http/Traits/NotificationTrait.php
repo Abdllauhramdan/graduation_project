@@ -6,6 +6,14 @@ use App\Models\User;
 
 trait NotificationTrait
 {
+    /**
+     * Send a notification to all registered devices.
+     *
+     * @param String $title The title of the notification.
+     * @param String $body The body of the notification.
+     * @param array $data Additional data to include in the notification.
+     * @return mixed The result of the FCM notification.
+     */
     public function sendNotification(String $title, String $body, array $data = [])
     {
         $url = 'https://fcm.googleapis.com/fcm/send';

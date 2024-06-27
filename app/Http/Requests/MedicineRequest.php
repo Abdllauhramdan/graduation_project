@@ -11,6 +11,11 @@ class MedicineRequest extends FormRequest
         return true; // Ensure authorization logic is properly set
     }
 
+    /**
+     * Get the validation rules that apply to the medicine request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [

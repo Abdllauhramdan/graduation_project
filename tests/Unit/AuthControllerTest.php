@@ -35,21 +35,28 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'message',
-                     'user' => [
-                         'id',
-                         'pharma_name',
-                         'pharmacist_name',
-                         'email',
-                         // Other fields...
-                     ],
-                     'authorisation' => [
-                         'token',
-                         'type'
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'user' => [
+                    'id',
+                    'pharma_name',
+                    'pharmacist_name',
+                    'password',
+                    'email',
+                    'license_number',
+                    'phone',
+                    'license_date',
+                    'pharmacist_gender',
+                    'address',
+                    'role_name',
+                    'is_band',
+                ],
+                'authorisation' => [
+                    'token',
+                    'type'
+                ]
+            ]);
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
@@ -72,20 +79,27 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'user' => [
-                         'id',
-                         'pharma_name',
-                         'pharmacist_name',
-                         'email',
-                         // Other fields...
-                     ],
-                     'authorisation' => [
-                         'token',
-                         'type'
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'user' => [
+                    'id',
+                    'pharma_name',
+                    'pharmacist_name',
+                    'password',
+                    'email',
+                    'license_number',
+                    'phone',
+                    'license_date',
+                    'pharmacist_gender',
+                    'address',
+                    'role_name',
+                    'is_band',
+                ],
+                'authorisation' => [
+                    'token',
+                    'type'
+                ]
+            ]);
     }
 
     /** @test */
@@ -102,10 +116,10 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(401)
-                 ->assertJson([
-                     'status' => 'error',
-                     'message' => 'Unauthorized',
-                 ]);
+            ->assertJson([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ]);
     }
 
     /** @test */
@@ -118,10 +132,10 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/logout');
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Successfully logged out',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Successfully logged out',
+            ]);
     }
 
     /** @test */
@@ -134,20 +148,27 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/refresh');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'user' => [
-                         'id',
-                         'pharma_name',
-                         'pharmacist_name',
-                         'email',
-                         // Other fields...
-                     ],
-                     'authorisation' => [
-                         'token',
-                         'type'
-                     ]
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'user' => [
+                    'id',
+                    'pharma_name',
+                    'pharmacist_name',
+                    'password',
+                    'email',
+                    'license_number',
+                    'phone',
+                    'license_date',
+                    'pharmacist_gender',
+                    'address',
+                    'role_name',
+                    'is_band',
+                ],
+                'authorisation' => [
+                    'token',
+                    'type'
+                ]
+            ]);
     }
 
     /** @test */
@@ -160,16 +181,23 @@ class AuthControllerTest extends TestCase
         $response = $this->getJson('/api/user/' . $user->id);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'data' => [
-                         'id',
-                         'pharma_name',
-                         'pharmacist_name',
-                         'email',
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    'id',
+                    'pharma_name',
+                    'pharmacist_name',
+                    'password',
+                    'email',
+                    'license_number',
+                    'phone',
+                    'license_date',
+                    'pharmacist_gender',
+                    'address',
+                    'role_name',
+                    'is_band',
+                ],
+            ]);
     }
 
     /** @test */
@@ -184,15 +212,15 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'User updated successfully',
-                     'data' => [
-                         'id' => $user->id,
-                         'pharma_name' => 'Updated Pharma Name',
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'User updated successfully',
+                'data' => [
+                    'id' => $user->id,
+                    'pharma_name' => 'Updated Pharma Name',
+                    // Other fields...
+                ],
+            ]);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
@@ -210,10 +238,10 @@ class AuthControllerTest extends TestCase
         $response = $this->deleteJson('/api/user/' . $user->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'User deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'User deleted successfully',
+            ]);
 
         $this->assertSoftDeleted('users', [
             'id' => $user->id,
@@ -231,14 +259,14 @@ class AuthControllerTest extends TestCase
         $response = $this->postJson('/api/user/restore/' . $user->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'User restored successfully',
-                     'data' => [
-                         'id' => $user->id,
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'User restored successfully',
+                'data' => [
+                    'id' => $user->id,
+                    // Other fields...
+                ],
+            ]);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
@@ -254,17 +282,16 @@ class AuthControllerTest extends TestCase
 
         $this->actingAs($user, 'api');
 
-        $response = $this->deleteJson('/api/user/force-delete/' . $user->id);
+        $response = $this->deleteJson('/api/user/. $user->id/force-delete/' . $user->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'User force deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'User force deleted successfully',
+            ]);
 
         $this->assertDatabaseMissing('users', [
             'id' => $user->id,
         ]);
     }
 }
-

@@ -13,6 +13,7 @@ class MedicineControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public $medicineController; // ملاحظة
     protected function setUp(): void
     {
         parent::setUp();

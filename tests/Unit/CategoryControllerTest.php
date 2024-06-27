@@ -19,16 +19,16 @@ class CategoryControllerTest extends TestCase
         $response = $this->getJson('/api/categories');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'status',
-                     'data' => [
-                         '*' => [
-                             'id',
-                             'name',
-                             // Other fields...
-                         ],
-                     ],
-                 ]);
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        // Other fields...
+                    ],
+                ],
+            ]);
     }
 
     /** @test */
@@ -41,13 +41,13 @@ class CategoryControllerTest extends TestCase
         $response = $this->postJson('/api/categories', $categoryData);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'data' => [
-                         'name' => 'Test Category',
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'data' => [
+                    'name' => 'Test Category',
+                    // Other fields...
+                ],
+            ]);
 
         $this->assertDatabaseHas('categories', $categoryData);
     }
@@ -60,14 +60,14 @@ class CategoryControllerTest extends TestCase
         $response = $this->getJson('/api/categories/' . $category->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'data' => [
-                         'id' => $category->id,
-                         'name' => $category->name,
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'data' => [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    // Other fields...
+                ],
+            ]);
     }
 
     /** @test */
@@ -82,14 +82,14 @@ class CategoryControllerTest extends TestCase
         $response = $this->putJson('/api/categories/' . $category->id, $updatedData);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'data' => [
-                         'id' => $category->id,
-                         'name' => 'Updated Category Name',
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'data' => [
+                    'id' => $category->id,
+                    'name' => 'Updated Category Name',
+                    // Other fields...
+                ],
+            ]);
 
         $this->assertDatabaseHas('categories', $updatedData);
     }
@@ -102,10 +102,10 @@ class CategoryControllerTest extends TestCase
         $response = $this->deleteJson('/api/categories/' . $category->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Category deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Category deleted successfully',
+            ]);
 
         $this->assertSoftDeleted('categories', [
             'id' => $category->id,
@@ -121,14 +121,14 @@ class CategoryControllerTest extends TestCase
         $response = $this->postJson('/api/categories/restore/' . $category->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Category restored successfully',
-                     'data' => [
-                         'id' => $category->id,
-                         // Other fields...
-                     ],
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Category restored successfully',
+                'data' => [
+                    'id' => $category->id,
+                    // Other fields...
+                ],
+            ]);
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
@@ -145,10 +145,10 @@ class CategoryControllerTest extends TestCase
         $response = $this->deleteJson('/api/categories/force-delete/' . $category->id);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'success',
-                     'message' => 'Category force deleted successfully',
-                 ]);
+            ->assertJson([
+                'status' => 'success',
+                'message' => 'Category force deleted successfully',
+            ]);
 
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,

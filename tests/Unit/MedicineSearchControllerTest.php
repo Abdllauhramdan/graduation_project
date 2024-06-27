@@ -12,6 +12,7 @@ class MedicineSearchControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public $medicineSearchController;
     protected function setUp(): void
     {
         parent::setUp();

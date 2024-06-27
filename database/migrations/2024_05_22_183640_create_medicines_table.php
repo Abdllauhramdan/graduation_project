@@ -18,17 +18,16 @@ return new class extends Migration
             $table->string('company_name');
             $table->boolean('prescription_status')->default(false);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();   /*we will see if we could link it with category_name */
-            $table->date('production_date');//->default(DB::raw('CURRENT_TIMESTAMP'))->change();
-
-            $table->date('expiration_date');//->default(now()->addYear())->change();
-            $table->decimal('purchase_price', 8, 2);//->default(0.00)->change();
-            $table->decimal('selling_price', 8, 2);//->default(0.00)->change();
+            $table->date('production_date'); //->default(DB::raw('CURRENT_TIMESTAMP'))->change();
+            $table->date('expiration_date'); //->default(now()->addYear())->change();
+            $table->decimal('purchase_price', 8, 2); //->default(0.00)->change();
+            $table->decimal('selling_price', 8, 2); //->default(0.00)->change();
             $table->string('med_image')->nullable();
             $table->json('alternative')->nullable();
             $table->string('description');
             $table->string('contraindications');
             $table->string('dose');
-            $table->enum('medicine_shape', ['syrub', 'pills','injection','cream','drops','suppositories','others']);
+            $table->enum('medicine_shape', ['syrub', 'pills', 'injection', 'cream', 'drops', 'suppositories', 'others']);
             $table->bigInteger('max_quantity_allowed');
             $table->softDeletes();
             $table->timestamps();

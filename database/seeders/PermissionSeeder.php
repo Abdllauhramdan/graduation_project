@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class PermissionSeeder extends Seeder
 {
@@ -13,7 +17,7 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'view-medicines',
+        'view-medicines',
         'create-medicine',
         'update-medicine',
         'delete-medicine',
@@ -26,11 +30,11 @@ class PermissionSeeder extends Seeder
         'delete-user',
         'restore-user',
         'force-delete-user',
-        'view-roles',
-        'create-role',
-        'view-role',
-        'update-role',
-        'delete-role',
+        // 'view-roles',
+        // 'create-role',
+        // 'view-role',
+        // 'update-role',
+        // 'delete-role',
         'view-sales-operations',
         'view-sales-operation',
         'update-sales-operation',

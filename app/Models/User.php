@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Models\Role;
 
 
 
@@ -32,6 +33,8 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'pharmacist_gender',
         'is_band',
+        'role_name',
+
     ];
 
     /**

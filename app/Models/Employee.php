@@ -26,15 +26,15 @@ class Employee extends Model implements JWTSubject
         'salary',
     ];
 
-    public function sales_operation()
-    {
-        return $this->hasMany(SalesOperation::class, 'employee_id');
-    }
+    // public function sales_operation()
+    // {
+    //     return $this->hasMany(Sales_Operation::class, 'employee_id');
+    // }
 
     protected $guard_name = 'employee';
 
 
-  protected $hidden = [
+    protected $hidden = [
         'password',
         'remember_token',
     ];
@@ -48,7 +48,7 @@ class Employee extends Model implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-     /**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

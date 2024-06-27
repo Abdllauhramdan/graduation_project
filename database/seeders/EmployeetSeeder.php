@@ -4,6 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class EmployeetSeeder extends Seeder
 {
@@ -19,11 +24,37 @@ class EmployeetSeeder extends Seeder
 
         $employeePermissions = [
             'view-medicines',
+            'create-medicine',
+            'update-medicine',
+            'delete-medicine',
+            'restore-medicine',
+            'force-delete-medicine',
             'view-users',
-            'view-roles',
+            'create-user',
+            'view-user',
+            'update-user',
+            'delete-user',
+            'restore-user',
+            'force-delete-user',
+            // 'view-roles',
+            // 'create-role',
+            // 'view-role',
+            // 'update-role',
+            // 'delete-role',
             'view-sales-operations',
+            'view-sales-operation',
+            'update-sales-operation',
+            'delete-sales-operation',
+            'restore-sales-operation',
+            'force-delete-sales-operation',
+            'remove-medicine-from-sales-operation',
             'view-categories',
-            'view-employees',
+            'create-category',
+            'view-category',
+            'update-category',
+            'delete-category',
+            'restore-category',
+            'force-delete-category',
         ];
 
         // $permissions = Permission::pluck('id', 'id')->all();

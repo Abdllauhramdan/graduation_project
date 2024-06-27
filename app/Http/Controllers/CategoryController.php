@@ -21,17 +21,31 @@ class CategoryController extends Controller
      */
 
     
-//  public function __construct()
-//     {
-//         // $this->middleware(['permission:create-category'], ['only' => ['create', 'store']]);
-//         // $this->middleware(['permission:view-category'], ['only' => ['show']]);
-//         // $this->middleware(['permission:update-category'], ['only' => ['edit', 'update']]);
-//         // $this->middleware(['permission:delete-category'], ['only' => ['destroy']]);
-//         // $this->middleware(['permission:view-categories'], ['only' => ['index']]);
-//         // $this->middleware(['permission:restore-category'], ['only' => ['restore']]);
-//         // $this->middleware(['permission:force-delete-category'], ['only' => ['forceDelete']]);
-//         }
+    /**
+     * Constructor for the CategoryController class.
+     *
+     * This method sets up the middleware for the controller's methods.
+     * It applies specific middleware to specific methods based on permissions.
+     *
+     * @return void
+     */
+public function __construct()
+    {
+        $this->middleware(['permission:create-category'], ['only' => ['store']]);
+        $this->middleware(['permission:view-category'], ['only' => ['show']]);
+        $this->middleware(['permission:update-category'], ['only' => [ 'update']]);
+        $this->middleware(['permission:delete-category'], ['only' => ['destroy']]);
+        $this->middleware(['permission:view-categories'], ['only' => ['index']]);
+        $this->middleware(['permission:restore-category'], ['only' => ['restore']]);
+        $this->middleware(['permission:force-delete-category'], ['only' => ['forceDelete']]);
+        }
 
+/**
+ * Display a listing of the resource.
+ *
+ * @throws \Throwable description of exception
+ * @return Some_Return_Value
+ */
 public function index()
 {
     try {
@@ -118,6 +132,13 @@ public function index()
             return $this->customeResponse(null, "Error, Something went wrong", 500);
         }
     }
+    /**
+     * Restores a category with the given ID.
+     *
+     * @param string $id The ID of the category to restore.
+     * @return \Illuminate\Http\Response The response containing the restored category, a success message, and a status code.
+     * @throws \Throwable If an error occurs while restoring the category.
+     */
     public function restore(String $id)
     {
         try {
@@ -130,6 +151,13 @@ public function index()
         }
     }
     
+    /**
+     * Force delete a category.
+     *
+     * @param Category $category The category to be force deleted
+     * @throws \Throwable description of exception
+     * @return Some_Return_Value
+     */
     public function forceDelete(Category $category)
     {
         try {

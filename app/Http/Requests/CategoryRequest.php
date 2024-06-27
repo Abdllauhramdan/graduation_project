@@ -11,6 +11,11 @@ class CategoryRequest extends FormRequest
         return true; // Ensure you have proper authorization logic here
     }
 
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Some_Return_Value
+     */
     public function rules(): array
     {
         $categoryId = $this->category ? $this->category->id : null;

@@ -11,21 +11,21 @@ use Illuminate\Queue\SerializesModels;
 
 class SendWelcomeMail extends Mailable
 {
-   
+
     use Queueable, SerializesModels;
 
     public $email;
     public $password;
-    public $url;
+    // public $url;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($email, $password, $url)
+    public function __construct($email, $password,)
     {
         $this->email = $email;
         $this->password = $password;
-        $this->url = $url;
+        // $this->url = $url;
     }
 
     /**

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('address');
             $table->enum('pharmacist_gender', ['male', 'female']);
             $table->boolean('is_band')->default(false);
+            $table->string('role_name')->default('client')->change();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

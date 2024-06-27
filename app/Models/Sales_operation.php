@@ -12,30 +12,30 @@ class Sales_operation extends Model
     use SoftDeletes;
     protected $fillable = [
         'date',
-        'user_id', 
-        'quantity_sold', 
+        'user_id',
+        'quantity_sold',
         'total_price',
     ];
 
-    public function employees(){
+    // public function employees(){
 
-        return $this->belongsTo(Employee::class);
-    }
+    //     return $this->belongsTo(Employee::class);
+    // }
     // public function users(){
 
     //     return $this->belongsTo(User::class);
-        
+
     // }
     public function users()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     //     public function medicines()
     // {
     //     return $this->belongsToMany(Medicine::class, 'sales_med');
     // }
-    
+
     public function medicines()
     {
         return $this->belongsToMany(Medicine::class, 'sales_med', 'sale_opreation_id', 'medicine_id')->withPivot('quantity');

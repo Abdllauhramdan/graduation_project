@@ -22,16 +22,35 @@ class MedicineController extends Controller
     use MedicineNotificationTrait;
 
 
-//     function __construct()
-// {
-//     $this->middleware(['permission:view-medicines'], ['only' => ['index']]);
-//     $this->middleware(['permission:create-medicine'], ['only' => ['store']]);
-//     $this->middleware(['permission:update-medicine'], ['only' => ['update']]);
-//     $this->middleware(['permission:delete-medicine'], ['only' => ['destroy']]);
-//     $this->middleware(['permission:restore-medicine'], ['only' => ['restore']]);
-//     $this->middleware(['permission:force-delete-medicine'], ['only' => ['forceDelete']]);
-// }
+    /**
+     * Constructor for the class.
+     *
+     * This constructor sets up middleware for the class methods.
+     * It applies the 'permission:view-medicines' middleware to the 'index' method,
+     * the 'permission:create-medicine' middleware to the 'store' method,
+     * the 'permission:update-medicine' middleware to the 'update' method,
+     * the 'permission:delete-medicine' middleware to the 'destroy' method,
+     * the 'permission:restore-medicine' middleware to the 'restore' method,
+     * and the 'permission:force-delete-medicine' middleware to the 'forceDelete' method.
+     *
+     * @return void
+     */
+    function __construct()
+{
+    $this->middleware(['permission:view-medicines'], ['only' => ['index']]);
+    $this->middleware(['permission:create-medicine'], ['only' => ['store']]);
+    $this->middleware(['permission:update-medicine'], ['only' => ['update']]);
+    $this->middleware(['permission:delete-medicine'], ['only' => ['destroy']]);
+    $this->middleware(['permission:restore-medicine'], ['only' => ['restore']]);
+    $this->middleware(['permission:force-delete-medicine'], ['only' => ['forceDelete']]);
+}
 
+    /**
+     * Retrieves all medicines and returns a custom response.
+     *
+     * @throws \Throwable description of exception
+     * @return Some_Return_Value
+     */
     public function index()
     {
         try {
@@ -43,6 +62,13 @@ class MedicineController extends Controller
         }
     }
 
+    /**
+     * Store a newly created medicine in the database.
+     *
+     * @param MedicineRequest $request The request object containing the medicine data.
+     * @throws \Throwable If an error occurs during the creation of the medicine.
+     * @return \Illuminate\Http\JsonResponse The JSON response containing the created medicine or an error message.
+     */
     public function store(MedicineRequest $request)
     {
         try {
@@ -72,6 +98,13 @@ class MedicineController extends Controller
         }
     }
 
+    /**
+     * Retrieves a specific medicine and returns a custom response.
+     *
+     * @param Medicine $medicine The medicine to be retrieved.
+     * @throws \Throwable If an error occurs.
+     * @return \Illuminate\Http\JsonResponse The custom response.
+     */
     public function show(Medicine $medicine)
     {
         try {
@@ -113,14 +146,21 @@ class MedicineController extends Controller
         }
     }
 ////////////////////////////////////////////
-    public function destroy(Medicine $medicine)
+
+    /**
+     * Deletes a medicine from the database and sends a notification and email before the expiration date.
+     *
+     * @param Medicine $medicine The medicine object to be deleted.
+     * @throws \Throwable If an error occurs during the deletion process.
+     * @return \Illuminate\Http\JsonResponse The JSON response containing the result of the deletion.
+     */
+public function destroy(Medicine $medicine)
     {
         try {
             $medicineName = $medicine->name;
             $expirationDate = $medicine->expiration_date;
             $medicine->delete();
-            // إرسال الإشعار والبريد الإلكتروني قبل 15 يومًا من تاريخ انتهاء صلاحية الدواء
-            // $this->sendNotificationAndEmailBeforeExpiration($medicineName, $expirationDate);
+        
             return $this->customeResponse(null, 'Medicine deleted successfully', 200);
         } catch (\Throwable $th) {
             Log::error($th);
@@ -129,6 +169,15 @@ class MedicineController extends Controller
         }
     }
     ///////////////////////////////////////////
+
+    /**
+     * Restores a deleted medicine from the database.
+     *
+     * @param string $id The ID of the medicine to restore.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException If the medicine with the given ID is not found.
+     * @throws \Throwable If an error occurs during the restoration process.
+     * @return \Illuminate\Http\JsonResponse The JSON response containing the restored medicine and a status message.
+     */
     public function restore(String $id)
     {
         try {
@@ -146,6 +195,14 @@ class MedicineController extends Controller
     }
     
 
+    
+    /**
+     * Force delete a medicine from the database.
+     *
+     * @param Medicine $medicine The medicine object to be deleted.
+     * @throws \Throwable If an error occurs during the force deletion process.
+     * @return \Illuminate\Http\JsonResponse The JSON response containing the result of the deletion.
+     */
 public function forceDelete(Medicine $medicine)
 {
     try {

@@ -11,6 +11,11 @@ class UpdateUserRequest extends FormRequest
         return true; // أو تحقق من صلاحيات المستخدم هنا إن لزم الأمر
     }
 
+    /*
+     * Returns an array of validation rules for the update user request.
+     *
+     * @return array An array of validation rules.
+     */
     public function rules(): array
     {
         return [

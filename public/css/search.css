@@ -1,0 +1,24 @@
+.ais-SearchBox {
+    margin-bottom: 1em;
+  }
+  
+  .ais-InstantSearch {
+    max-width: 960px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto
+  }
+  
+  .ais-Hits-item {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .ais-Hits-item img {
+    margin-right: 1em
+  }
+  
+  .ais-Hits-list {
+    margin-bottom: 1em;
+  }

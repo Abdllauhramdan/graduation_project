@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator; // استيراد Validator من المسار الصحيح
+use Illuminate\Http\Exceptions\HttpResponseException; // استيراد HttpResponseException من المسار الصحيح
+use App\Providers\ApiResponseService; // استيراد ApiResponseService من المسار الصحيح (تأكد من أن المسار صحيح بناءً على هيكلية مشروعك)
 
 class LoginRequest extends FormRequest
 {
@@ -24,9 +27,15 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|email|exists:users,email',
             'password' => 'required|string|min:8|max:50|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*?&]/',
-            
+
         ];
     }
+    /**
+     * Returns an array of validation error messages.
+     *
+     * @return array<string, string> An associative array where the keys are the validation
+     *     rule names and the values are the corresponding error messages.
+     */
     public function messages(): array
     {
         return [
@@ -40,11 +49,11 @@ class LoginRequest extends FormRequest
             'password.regex' => 'The password format is invalid.',
         ];
     }
-    
+
     protected function prepareValidation(Validator $validator)
     {
         $errors = $validator->errors()->all();
 
-        throw new HttpResponseException(ApiResponseService::error('Validation Errors',422,$errors));
+        throw new HttpResponseException(ApiResponseService::error('Validation Errors', 422, $errors));
     }
 }

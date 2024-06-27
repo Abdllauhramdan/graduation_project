@@ -15,6 +15,7 @@ class SalesOperationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public $salesOperationController;
     protected function setUp(): void
     {
         parent::setUp();
